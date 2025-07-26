@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Acceso Nomiweb</title>
+    <link rel="icon" href="{{ logos['favicon'] }}" type="image/jpg">
+</head>
+ <body>
+        <h1>Acceso Nomiweb Pruebas</h1>
+        <a href="https://nomiweb.dms.ms/{{ nombre | lower }}/" target="_blank">
+            <img src="{{ ruta }}" alt="Logo {{ nombre }}" title="Ir al portal de {{ nombre }}" width="120" style="margin:10px;">
+        </a>
+
+        <a href="https://nomiweb.dms.ms/PortalPruebas/" target="_blank">
+            <img src="{imagen_url}" alt="Logo" title="Ir al portal empleados Pruebas">
+        </a>
+
+        <a href="https://nomiweb.dms.ms/Portal_Autorizaciones_Prueba/" target="_blank">
+            <img src="{imagen_url}" alt="Logo" title="Ir al portal de autorizaciones Pruebas">
+        </a>
+    </body>
+
+      </head>
+
+    <body>
+        <h1>Acceso Autorizaciones Portal de Empleados Nomiweb</h1>
+        <a href="https://nomiweb.dms.ms/Portal_Autorizaciones/" target="_blank">
+            <img src="{imagen_url}" alt="Logo" title="Ir al portal de autorizaciones">
+        </a>
+    </body>
+
+
+    <body>
+        <h1>Acceso Nomiweb Externos</h1>
+        <a href="http://181.143.9.50:8082/login_admin.aspx" target="_blank">
+            <img src="{ESTYMA}" alt="Logo" title="Ir al portal Nomiweb de ESTYMA">
+        </a>
+        <a href="http://181.143.9.50:8084/login_admin.aspx" target="_blank">
+            <img src="{Vialactea}" alt="Logo" title="Ir al portal Nomiweb de Vialactea">
+        </a>
+
+    </body>
+<body>
+    <h1>Acceso Portales</h1>
+    {% for nombre, ruta in logos.items() if nombre not in ['imagen_url', 'favicon'] %}
+        <a href="https://nomiweb.dms.ms/{{ nombre | lower }}/" target="_blank">
+            <img src="{{ ruta }}" alt="Logo {{ nombre }}" title="Ir al portal de {{ nombre }}" width="120" style="margin:10px;">
+        </a>
+    {% endfor %}
+</body>
+</html>

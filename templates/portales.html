@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Accesos Nomiweb</title>
+    <link rel="icon" href="{{ logos['favicon'] }}" type="image/jpg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .menu {
+            width: 250px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .menu h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .menu button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.3s;
+        }
+
+        .menu button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .portal-logo {
+            width: 120px;
+            margin: 10px;
+        }
+        
+        .tooltip {
+                    position: relative;
+                    display: inline-block;
+                    margin: 10px;
+                }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 6px 10px;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            bottom: 100%; /* muestra encima de la imagen */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+                            }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+                                    }
+
+    </style>
+</head>
+<body>
+
+    <div class="menu">
+        <h2>Secciones</h2>
+        <button onclick="showSection('pruebas')">Acceso Nomiweb Pruebas</button>
+        <button onclick="showSection('autorizaciones')">Autorizaciones Empleados</button>
+        <button onclick="showSection('externos')">Acceso Nomiweb Externos</button>
+        <button onclick="showSection('dinamicos')">Portales Empleados</button>
+        <button onclick="showSection('externos portal')">Acceso Portal Empleados Externos</button>
+    </div>
+
+    <div class="content">
+        <div id="pruebas" class="section active">
+            <h1>Acceso Nomiweb Pruebas</h1>
+            <a href="http://nomiweb.dms.ms:81/Login_admin.aspx" target="_blank" class="tooltip">
+                <img src="{{ logos['imagen_url'] }}" alt="Logo imagen_url" class="portal-logo">
+                <span class="tooltip-text">Ir a Nomiweb Pruebas</span>
+            </a>
+            <a href="https://nomiweb.dms.ms/PortalPruebas/" target="_blank" class="tooltip">
+                <img src="{{ logos['imagen_url'] }}" alt="Logo imagen_url" class="portal-logo">
+                <span class="tooltip-text">Ir al portal empleado pruebas</span>
+            </a>
+            <a href="https://nomiweb.dms.ms/Portal_Autorizaciones_Prueba/" target="_blank" class="tooltip">
+                <img src="{{ logos['imagen_url'] }}" alt="Logo imagen_url" class="portal-logo">
+                <span class="tooltip-text">Ir al portal de autorizaciones pruebas</span>
+            </a>
+            <a href="http://181.143.9.50:8086/login_admin.aspx/" target="_blank" class="tooltip">
+                <img src="{{ logos['ESTYMA'] }}" alt="Logo ESTYMA" class="portal-logo">
+                <span class="tooltip-text">Ir al portal nomiweb Estyma pruebas</span>
+            </a>
+        </div>
+
+        <div id="autorizaciones" class="section">
+            <h1>Autorizaciones Portal de Empleados</h1>
+            <a href="https://nomiweb.dms.ms/Portal_Autorizaciones/" target="_blank" class="tooltip">
+                <img src="{{ logos['imagen_url'] }}" alt="Logo imagen_url" class="portal-logo">
+                <span class="tooltip-text">Ir al portal de autorizaciones</span>
+            </a>
+        </div>
+
+        <div id="externos" class="section">
+            <h1>Acceso Nomiweb Externos</h1>
+            <a href="http://181.143.9.50:8082/login_admin.aspx" target="_blank" class="tooltip">
+                <img src="{{ logos['ESTYMA'] }}" alt="Logo Estyma" class="portal-logo">
+                <span class="tooltip-text">Ir a Nomiweb Estyma</span>
+            </a>
+            <a href="http://181.143.9.50:8084/login_admin.aspx" target="_blank" class="tooltip">
+                <img src="{{ logos['Vialactea'] }}" alt="Logo Vialactea" class="portal-logo">
+                <span class="tooltip-text">Ir a Nomiweb Vialactea</span>
+            </a>
+        </div>
+
+        <div id="dinamicos" class="section">
+            <h1>Acceso Portales Empleados</h1>
+            {% for nombre, ruta in logos.items() if nombre not in ['imagen_url', 'favicon', 'Dynamic', 'DynamicE', 'Pijaos', 'ESTYMA', 'Vialactea','Casab'] %}
+                <a href="https://nomiweb.dms.ms/{{ nombre | lower }}/" target="_blank" class="tooltip">
+                    <img src="{{ ruta }}" alt="Logo {{ nombre }}" class="portal-logo">
+                    <span class="tooltip-text">Ir al portal de {{ nombre }}</span>
+                </a>
+            {% endfor %}
+        </div>
+
+        <div id="externos portal" class="section">
+            <h1>Acceso Portal Empleados Externos</h1>
+            <a href="https://casabritanica.eastus2.cloudapp.azure.com:1047/" target="_blank" class="tooltip">
+                <img src="{{ logos['Casab'] }}" alt="Logo Casabritánica" class="portal-logo">
+                <span class="tooltip-text">Ir al portal de Casabritánica</span>
+            </a>
+
+             <a href="http://181.143.9.50:8082/Portal_Empleados/" target="_blank" class="tooltip">
+                <img src="{{ logos['ESTYMA'] }}" alt="Logo ESTYMA" class="portal-logo">
+                <span class="tooltip-text">Ir al portal de ESTYMA</span>
+            </a>
+             <a href="http://181.143.9.50:8084/Portal_Empleados/" target="_blank" class="tooltip">
+                <img src="{{ logos['Vialactea'] }}" alt="Logo Vialactea" class="portal-logo">
+                <span class="tooltip-text">Ir al portal de Vialactea</span>
+            </a>
+           
+        </div>
+    </div>
+
+    <script>
+        function showSection(id) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(s => s.classList.remove('active'));
+
+            const target = document.getElementById(id);
+            if (target) {
+                target.classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
