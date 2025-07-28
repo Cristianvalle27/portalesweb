@@ -92,12 +92,21 @@
 
     <div class="menu">
         <h2>Secciones</h2>
+        <button onclick="showSection('NomiWeb')">Acceso Nomiweb</button>
         <button onclick="showSection('pruebas')">Acceso Nomiweb Pruebas</button>
         <button onclick="showSection('autorizaciones')">Autorizaciones Empleados</button>
         <button onclick="showSection('externos')">Acceso Nomiweb Externos</button>
         <button onclick="showSection('dinamicos')">Portales Empleados</button>
         <button onclick="showSection('externos portal')">Acceso Portal Empleados Externos</button>
     </div>
+
+      <div id="autorizaciones" class="section">
+            <h1>Nomiweb Real</h1>
+            <a href="https://nomiweb.dms.ms/Login_admin.aspx" target="_blank" class="tooltip">
+                <img src="{{ logos['imagen_url'] }}" alt="Logo imagen_url" class="portal-logo">
+                <span class="tooltip-text">Ir a NomiWeb Real</span>
+            </a>
+        </div>
 
     <div class="content">
         <div id="pruebas" class="section active">
@@ -107,11 +116,11 @@
                 <span class="tooltip-text">Ir a Nomiweb Pruebas</span>
             </a>
             <a href="https://nomiweb.dms.ms/PortalPruebas/" target="_blank" class="tooltip">
-                <img src="{{ logos['imagen_url'] }}" alt="Logo imagen_url" class="portal-logo">
+                <img src="{{ logos['portal'] }}" alt="Logo portal" class="portal-logo">
                 <span class="tooltip-text">Ir al portal empleado pruebas</span>
             </a>
             <a href="https://nomiweb.dms.ms/Portal_Autorizaciones_Prueba/" target="_blank" class="tooltip">
-                <img src="{{ logos['imagen_url'] }}" alt="Logo imagen_url" class="portal-logo">
+                <img src="{{ logos['portal'] }}" alt="Logo portal" class="portal-logo">
                 <span class="tooltip-text">Ir al portal de autorizaciones pruebas</span>
             </a>
             <a href="http://181.143.9.50:8086/login_admin.aspx/" target="_blank" class="tooltip">
