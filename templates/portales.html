@@ -150,7 +150,7 @@
 
         <div id="dinamicos" class="section">
             <h1>Acceso Portales Empleados</h1>
-            {% for nombre, ruta in logos.items() if nombre not in ['imagen_url', 'favicon', 'Dynamic', 'DynamicE', 'Pijaos', 'ESTYMA', 'Vialactea','Casab'] %}
+            {% for nombre, ruta in logos.items() if nombre not in ['imagen_url', 'favicon', 'Dynamic', 'DynamicE', 'Pijaos', 'ESTYMA', 'Vialactea','Casab','portal'] %}
                 <a href="https://nomiweb.dms.ms/{{ nombre | lower }}/" target="_blank" class="tooltip">
                     <img src="{{ ruta }}" alt="Logo {{ nombre }}" class="portal-logo">
                     <span class="tooltip-text">Ir al portal de {{ nombre }}</span>
