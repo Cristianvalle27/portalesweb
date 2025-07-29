@@ -15,7 +15,7 @@ def index():
         "Grupoconhydra", "Herson", "Adoquinar", "ISUZU", "JoyeriaInter", "medicalsupplies",
         "Medife", "grupomonaco", "aliadas", "Morarci", "MOTOBLU", "Pasumotos", "NOVAMOTORS",
         "Pijaos", "ellas", "Redihos", "Redllantas", "Rylsa", "Sida", "Subocol", "Suky_Moto",
-        "SUMOTO", "Surtizora", "Tiendas", "Vialactea", "yamahasports","Casab","portal"
+        "SUMOTO", "Surtizora", "Tiendas", "Vialactea", "yamahasports","Casab","portalA","portalE"
     ]
 
     logos = {name: url_for('static', filename=f"{name}.jpg") for name in empresa_archivos}
