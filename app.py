@@ -18,13 +18,19 @@ def index():
         "SUMOTO", "Surtizora", "Tiendas", "Vialactea", "yamahasports","Casab","PortalA","PortalE"
     ]
 
-    logos = {name: url_for('static', filename=f"{name}.jpg") for name in empresa_archivos}
-    logos["imagen_url"] = url_for('static', filename='NomiwebLogo.jpg')
-    logos["favicon"] = url_for('static', filename='favicon.jpg')
+ # Diccionario de logos
+    logos = {name: url_for('static', filename=f"{name}.jpg") for name in empresas}
+    logos.update({
+        "imagen_url": url_for('static', filename='NomiwebLogo.jpg'),
+        "favicon": url_for('static', filename='favicon.jpg')
+    })
 
     return render_template("portales.html", logos=logos)
 
 if __name__ == "__main__":
     #app.run(debug=True)
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    try:
+        port = int(os.environ.get('PORT', 5000))
+        app.run(host='0.0.0.0', port=port)
+    except Exception as e:
+        print(f"Error iniciando la app: {e}")
