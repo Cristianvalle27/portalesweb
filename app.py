@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route("/")
 #def home():
 def index():
-    empresa_archivos = [
+    empresas = [
         "Autochevrolet", "Automarcol", "autotropical", "BIOPHARMA", "CARGRANEL",
         "CENPI", "Colacteos", "Colegas", "diesellamontana", "DISDROBLAN", "DistriMayor", "Distrimedical",
         "DynamicE", "Dynamic", "drogueriaparis", "Dromedics", "Econnabis", "ESTYMA", "EUROAUTOS",
