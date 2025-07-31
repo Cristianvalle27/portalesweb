@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for
+from datetime import datetime
 import os
 
 app = Flask(__name__)
@@ -25,7 +26,7 @@ def index():
         "favicon": url_for('static', filename='favicon.jpg')
     })
 
-    return render_template("portales.html", logos=logos)
+    return render_template("portales.html", logos=logos, now=datetime.now())
 
 if __name__ == "__main__":
     #app.run(debug=True)
