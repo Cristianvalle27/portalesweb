@@ -158,46 +158,10 @@
         padding: 10px 5px;
       }
     }
-
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  padding: 10px;
-  margin: 10px;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-@media (max-width: 600px) {
-  .hamburger {
-    display: block;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-  }
-
-  .menu {
-    display: none;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    width: 100%;
-    background-color: #ffffff;
-    padding: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    z-index: 999;
-  }
-
-  .menu.show {
-    display: block;
-  }
-}
   </style>
 </head>
 <body>
-<button class="hamburger" onclick="toggleMenu()">☰</button>
+
 <div class="page-container">
   <div class="menu">
     <h2>Secciones</h2>
@@ -307,18 +271,9 @@
     if (target) {
       target.classList.add('active');
     }
-    // Si está en móvil, oculta el menú tras seleccionar
-    const menu = document.querySelector('.menu');
-    if (window.innerWidth <= 600) {
-      menu.classList.remove('show');
-    }
-  }
-
-  function toggleMenu() {
-    const menu = document.querySelector('.menu');
-    menu.classList.toggle('show');
   }
 </script>
 
 </body>
 </html>
+
