@@ -113,6 +113,45 @@
             to { opacity: 1; }
         }
 
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            color: #000000;
+            text-align: center;
+            padding: 12px 0;
+            font-size: 0.9em;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        /* Responsive: Ajustes para móviles */
+        @media (max-width: 600px) {
+            footer {
+            font-size: 0.8em;
+            padding: 10px 5px;
+        }
+
+            .menu {
+            width: 100%;
+            padding: 10px;
+            box-shadow: none;
+        }
+
+            .content {
+            padding: 15px;
+            margin-bottom: 60px; /* espacio para el footer */
+        }
+
+            .portal-logo {
+                width: 80px;
+                margin: 6px;
+        }
+    }
+
+
     </style>
 </head>
 <body>
@@ -149,7 +188,7 @@
                 <img src="{{ logos['PortalA'] }}" alt="Logo PortalA" class="portal-logo">
                 <span class="tooltip-text">Ir al portal de autorizaciones pruebas</span>
             </a>
-            <a href="http://181.143.9.50:8086/login_admin.aspx" target="_blank" class="tooltip">
+            <a href="http://181.143.9.50:8086/login_admin.aspx/" target="_blank" class="tooltip">
                 <img src="{{ logos['ESTYMA'] }}" alt="Logo ESTYMA" class="portal-logo">
                 <span class="tooltip-text">Ir al portal nomiweb Estyma pruebas</span>
             </a>
@@ -172,10 +211,6 @@
             <a href="http://181.143.9.50:8084/login_admin.aspx" target="_blank" class="tooltip">
                 <img src="{{ logos['Vialactea'] }}" alt="Logo Vialactea" class="portal-logo">
                 <span class="tooltip-text">Ir a Nomiweb Vialactea</span>
-            </a>
-             <a href="https://nomiweb.desarrollohumano.com.co/" target="_blank" class="tooltip">
-                <img src="{{ logos['Casab'] }}" alt="Logo Casab" class="portal-logo">
-                <span class="tooltip-text">Ir a Nomiweb Casab</span>
             </a>
         </div>
 
@@ -219,6 +254,10 @@
             }
         }
     </script>
-
+<footer>
+    <p>&copy;  <span style="font-weight: bold;"> Dynamic Modular System DMS S.A </span> <br> 
+                Todos los derechos reservados.<br>
+                {{ now.year }}</p>
+</footer>
 </body>
 </html>
