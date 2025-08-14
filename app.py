@@ -16,11 +16,12 @@ def index():
         "Grupoconhydra", "Herson", "Adoquinar", "ISUZU", "JoyeriaInter", "medicalsupplies",
         "Medife", "grupomonaco", "aliadas", "Morarci", "MOTOBLU", "Pasumotos", "NOVAMOTORS",
         "Pijaos", "ellas", "Redihos", "Redllantas", "Rylsa", "Sida", "Subocol", "Suky_Moto",
-        "SUMOTO", "Surtizora", "Tiendas", "Vialactea", "yamahasports","Casab","PortalA","PortalE"
+        "SUMOTO", "Surtizora", "Tiendas", "Vialactea", "yamahasports","Casab","PortalA","PortalE","background2"
     ]
 
  # Diccionario de logos
     logos = {name: url_for('static', filename=f"{name}.jpg") for name in empresas}
+    logos['background2'] = url_for('static', filename='background2.jpg')
     logos.update({
         "imagen_url": url_for('static', filename='NomiwebLogo.jpg'),
         "favicon": url_for('static', filename='favicon.jpg')
