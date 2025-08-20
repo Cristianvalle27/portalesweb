@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>Accesos Nomiweb</title>
   <link rel="icon" href="{{ logos['favicon'] }}" type="image/jpg">
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
   <style>
 html, body {
   height: 100%;
@@ -22,21 +26,21 @@ body {
   background-attachment: fixed;
   font-family: "Segoe UI", sans-serif;
   color: #333;
-  position: relative; /* necesario para el overlay */
+  position: relative;
 }
 body::before {
   content: "";
-  position: fixed; /* cubre toda la pantalla */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255,255,255,0.4); /* blanco semitransparente, ajusta opacidad */
-  z-index: -1; /* se queda detrás del contenido */
+  background-color: rgba(255,255,255,0.4);
+  z-index: -1;
 }
 
 .page-container {
-  flex: 1; /* Empuja el footer hacia abajo */
+  flex: 1;
   display: flex;
   flex-direction: row;
   overflow-x: hidden;
@@ -83,7 +87,6 @@ body::before {
 
 .section {
   display: none;
-  animation: fadeIn 0.4s ease-in-out;
 }
 
 .section.active {
@@ -139,11 +142,6 @@ body::before {
   transform: scale(1.05);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 footer {
   background-color: #f1f1f1;
   color: #000;
@@ -153,12 +151,10 @@ footer {
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   .page-container {
     flex-direction: column;
   }
-
   .menu {
     width: 100%;
     padding: 10px;
@@ -166,16 +162,13 @@ footer {
     border-right: none;
     border-bottom: 1px solid #ddd;
   }
-
   .content {
     padding: 15px;
   }
-
   .portal-logo {
     width: 80px;
     margin: 6px;
   }
-
   footer {
     font-size: 0.8em;
     padding: 10px 5px;
@@ -200,7 +193,6 @@ footer {
     top: 10px;
     left: 10px;
   }
-
   .menu {
     display: none;
     position: absolute;
@@ -212,7 +204,6 @@ footer {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 999;
   }
-
   .menu.show {
     display: block;
   }
@@ -223,7 +214,6 @@ footer {
 <button class="hamburger" onclick="toggleMenu()">☰</button>
 <div class="page-container">
   <div class="menu">
-    <h2>Utilitario Servicio Nomiweb</h2>
     <h2>Secciones</h2>
     <button onclick="showSection('NomiWeb')">Acceso Nomiweb</button>
     <button onclick="showSection('pruebas')">Acceso Nomiweb Pruebas</button>
@@ -234,7 +224,7 @@ footer {
   </div>
 
   <div class="content">
-    <div id="NomiWeb" class="section active">
+    <div id="NomiWeb" class="section active animate__animated animate__fadeInLeft">
       <h1>Nomiweb Real</h1>
       <a href="https://nomiweb.dms.ms/Login_admin.aspx" target="_blank" class="tooltip">
         <img src="{{ logos['imagen_url'] }}" alt="Logo imagen_url" class="portal-logo">
@@ -318,20 +308,42 @@ footer {
   <p>
     &copy; <span style="font-weight: bold;">Dynamic Modular System DMS S.A</span><br>
     Todos los derechos reservados.<br>
-    {{ now.year }} Ver. 1.0.0<br>
-    &copy; <span style="font-weight: bold;">By Cristian Valle</span>
+    {{ now.year }}
   </p>
 </footer>
 
 <script>
   function showSection(id) {
     const sections = document.querySelectorAll('.section');
-    sections.forEach(s => s.classList.remove('active'));
+    sections.forEach(s => {
+      s.classList.remove('active','animate__animated','animate__fadeInLeft','animate__fadeInRight','animate__zoomIn','animate__fadeInUp','animate__fadeInDown');
+    });
 
     const target = document.getElementById(id);
     if (target) {
-      target.classList.add('active');
+      target.classList.add('active','animate__animated');
+      switch(id) {
+        case 'NomiWeb':
+          target.classList.add('animate__fadeInLeft');
+          break;
+        case 'pruebas':
+          target.classList.add('animate__fadeInRight');
+          break;
+        case 'autorizaciones':
+          target.classList.add('animate__zoomIn');
+          break;
+        case 'externos':
+          target.classList.add('animate__fadeInUp');
+          break;
+        case 'dinamicos':
+          target.classList.add('animate__fadeInDown');
+          break;
+        case 'externos portal':
+          target.classList.add('animate__zoomIn');
+          break;
+      }
     }
+
     if (window.innerWidth <= 600) {
       document.querySelector('.menu').classList.remove('show');
     }
