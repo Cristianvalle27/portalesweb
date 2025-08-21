@@ -191,10 +191,13 @@ footer {
   .content { padding: 15px; }
   footer { font-size: 0.8em; padding: 10px 5px; }
 }
+.hamburger.hidden {
+  display: none;
+}
   </style>
 </head>
 <body>
-<button class="hamburger" onclick="toggleMenu()" aria-label="Abrir/Cerrar menú">☰</button>
+<button class="hamburger hidden" onclick="toggleMenu()" aria-label="Abrir/Cerrar menú">☰</button>
 
 <div class="page-container">
   <div class="menu" id="menu">
@@ -299,14 +302,33 @@ footer {
 <script>
   // Abrir/cerrar menú
   function toggleMenu() {
-    document.getElementById("menu").classList.toggle("hidden");
+    const menu = document.getElementById("menu");
+    const hamburger = document.querySelector(".hamburger");
+
+    menu.classList.toggle("hidden");
+
+    if (menu.classList.contains("hidden")) {
+      // Menú oculto → mostrar hamburguesa
+      hamburger.classList.remove("hidden");
+    } else {
+      // Menú visible → ocultar hamburguesa
+      hamburger.classList.add("hidden");
+    }
   }
 
   // Cambiar de sección + ocultar menú para dar espacio al contenido
   function showSection(sectionId) {
     const sections = document.querySelectorAll(".section");
     sections.forEach(sec => {
-      sec.classList.remove("active", "animate__animated", "animate__fadeInLeft", "animate__fadeInRight", "animate__fadeInUp", "animate__fadeInDown", "animate__zoomIn");
+      sec.classList.remove(
+        "active",
+        "animate__animated",
+        "animate__fadeInLeft",
+        "animate__fadeInRight",
+        "animate__fadeInUp",
+        "animate__fadeInDown",
+        "animate__zoomIn"
+      );
     });
 
     const selected = document.getElementById(sectionId);
@@ -314,21 +336,37 @@ footer {
 
     selected.classList.add("active", "animate__animated");
 
-    // Reiniciar animación
-    void selected.offsetWidth; // forzar reflow
+    // Reiniciar animación (reflow)
+    void selected.offsetWidth;
 
     switch (sectionId) {
-      case "NomiWeb": selected.classList.add("animate__fadeInLeft"); break;
-      case "pruebas": selected.classList.add("animate__fadeInRight"); break;
-      case "autorizaciones": selected.classList.add("animate__fadeInUp"); break;
-      case "externos": selected.classList.add("animate__fadeInDown"); break;
-      case "dinamicos": selected.classList.add("animate__zoomIn"); break;
-      case "externos portal": selected.classList.add("animate__zoomIn"); break;
+      case "NomiWeb": 
+        selected.classList.add("animate__fadeInLeft"); 
+        break;
+      case "pruebas": 
+        selected.classList.add("animate__fadeInRight"); 
+        break;
+      case "autorizaciones": 
+        selected.classList.add("animate__fadeInUp"); 
+        break;
+      case "externos": 
+        selected.classList.add("animate__fadeInDown"); 
+        break;
+      case "dinamicos": 
+        selected.classList.add("animate__zoomIn"); 
+        break;
+      case "externos portal": 
+        selected.classList.add("animate__zoomIn"); 
+        break;
     }
 
-    // Ocultar menú tras seleccionar (para PC y móvil)
-    document.getElementById("menu").classList.add("hidden");
+    // Ocultar menú tras seleccionar sección
+    const menu = document.getElementById("menu");
+    const hamburger = document.querySelector(".hamburger");
+    menu.classList.add("hidden");
+    hamburger.classList.remove("hidden");
   }
 </script>
+
 </body>
 </html>
