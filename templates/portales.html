@@ -198,7 +198,7 @@ footer {
 
 <div class="page-container">
   <div class="menu" id="menu">
-    <h2>Secciones</h2>
+    <h2><br>Secciones</h2>
     <button onclick="showSection('NomiWeb')">Acceso Nomiweb</button>
     <button onclick="showSection('pruebas')">Acceso Nomiweb Pruebas</button>
     <button onclick="showSection('autorizaciones')">Autorizaciones Empleados</button>
@@ -209,7 +209,7 @@ footer {
 
   <div class="content">
     <div id="NomiWeb" class="section active animate__animated animate__fadeInLeft">
-      <h1>Nomiweb Real</h1>
+      <h1><br>Nomiweb Real</h1>
       <a href="https://nomiweb.dms.ms/Login_admin.aspx" target="_blank" class="tooltip">
         <img src="{{ logos['imagen_url'] }}" alt="Logo imagen_url" class="portal-logo">
         <span class="tooltip-text">Ir a NomiWeb Real</span>
@@ -217,7 +217,7 @@ footer {
     </div>
 
     <div id="pruebas" class="section">
-      <h1>Acceso Nomiweb Pruebas</h1>
+      <h1><br>Acceso Nomiweb Pruebas</h1>
       <a href="http://nomiweb.dms.ms:81/Login_admin.aspx" target="_blank" class="tooltip">
         <img src="{{ logos['imagen_url'] }}" alt="Logo imagen_url" class="portal-logo">
         <span class="tooltip-text">Ir a Nomiweb Pruebas</span>
@@ -237,7 +237,7 @@ footer {
     </div>
 
     <div id="autorizaciones" class="section">
-      <h1>Autorizaciones Portal de Empleados</h1>
+      <h1><br>Autorizaciones Portal de Empleados</h1>
       <a href="https://nomiweb.dms.ms/Portal_Autorizaciones/" target="_blank" class="tooltip">
         <img src="{{ logos['PortalA'] }}" alt="Logo PortalA" class="portal-logo">
         <span class="tooltip-text">Ir al portal de autorizaciones</span>
@@ -245,7 +245,7 @@ footer {
     </div>
 
     <div id="externos" class="section">
-      <h1>Acceso Nomiweb Externos</h1>
+      <h1><br>Acceso Nomiweb Externos</h1>
       <a href="http://181.143.9.50:8082/login_admin.aspx" target="_blank" class="tooltip">
         <img src="{{ logos['ESTYMA'] }}" alt="Logo Estyma" class="portal-logo">
         <span class="tooltip-text">Ir a Nomiweb Estyma</span>
@@ -261,7 +261,7 @@ footer {
     </div>
 
     <div id="dinamicos" class="section">
-      <h1>Acceso Portales Empleados</h1>
+      <h1><br>Acceso Portales Empleados</h1>
       {% for nombre, ruta in logos.items() if nombre not in ['imagen_url', 'favicon', 'Dynamic', 'DynamicE', 'Pijaos', 'ESTYMA', 'Vialactea','Casab','portal','PortalA','PortalE','background2'] %}
         <a href="https://nomiweb.dms.ms/{{ nombre | lower }}/" target="_blank" class="tooltip">
           <img src="{{ ruta }}" alt="Logo {{ nombre }}" class="portal-logo">
@@ -271,7 +271,7 @@ footer {
     </div>
 
     <div id="externos portal" class="section">
-      <h1>Acceso Portal Empleados Externos</h1>
+      <h1><br>Acceso Portal Empleados Externos</h1>
       <a href="https://casabritanica.eastus2.cloudapp.azure.com:1047/" target="_blank" class="tooltip">
         <img src="{{ logos['Casab'] }}" alt="Logo Casabritánica" class="portal-logo">
         <span class="tooltip-text">Ir al portal de Casabritánica</span>
