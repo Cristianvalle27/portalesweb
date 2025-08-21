@@ -44,8 +44,10 @@ body::before {
   display: flex;
   flex-direction: row;
   overflow-x: hidden;
+  position: relative;
 }
 
+/* Menú lateral */
 .menu {
   width: 240px;
   background-color: #ffffff;
@@ -53,6 +55,16 @@ body::before {
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #ddd;
   flex-shrink: 0;
+  transition: width 0.3s ease-in-out, padding 0.3s ease-in-out, transform 0.3s ease-in-out, border 0.3s ease-in-out;
+  overflow: hidden; /* para que no se vea el contenido al colapsar */
+}
+
+/* Cuando está oculto, colapsa su ancho y se traslada fuera */
+.menu.hidden {
+  width: 0;
+  padding: 0;
+  border: 0;
+  transform: translateX(-100%);
 }
 
 .menu h2 {
@@ -79,10 +91,12 @@ body::before {
   background-color: #e8e8e8;
 }
 
+/* Contenido principal: ocupa todo el espacio disponible del flex */
 .content {
-  flex-grow: 1;
+  flex: 1 1 auto;
   padding: 30px;
   overflow-y: auto;
+  min-width: 0; /* para evitar overflow horizontal en flex */
 }
 
 .section {
@@ -151,69 +165,39 @@ footer {
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 600px) {
-  .page-container {
-    flex-direction: column;
-  }
-  .menu {
-    width: 100%;
-    padding: 10px;
-    box-shadow: none;
-    border-right: none;
-    border-bottom: 1px solid #ddd;
-  }
-  .content {
-    padding: 15px;
-  }
-  .portal-logo {
-    width: 80px;
-    margin: 6px;
-  }
-  footer {
-    font-size: 0.8em;
-    padding: 10px 5px;
-  }
-}
-
+/* Botón hamburguesa SIEMPRE visible (PC y móvil) */
 .hamburger {
-  display: none;
-  background: none;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
   border: none;
   font-size: 24px;
-  padding: 10px;
+  line-height: 1;
+  padding: 10px 12px;
   margin: 10px;
   cursor: pointer;
   z-index: 1000;
+  position: fixed;  /* fijo para que siempre esté accesible */
+  top: 10px;
+  left: 10px;
+  border-radius: 6px;
+}
+.hamburger:hover {
+  background: rgba(0,0,0,0.85);
 }
 
+/* Ajustes responsive suaves (sin cambiar la lógica del botón) */
 @media (max-width: 600px) {
-  .hamburger {
-    display: block;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-  }
-  .menu {
-    display: none;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    width: 100%;
-    background-color: #ffffff;
-    padding: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    z-index: 999;
-  }
-  .menu.show {
-    display: block;
-  }
+  .portal-logo { width: 80px; margin: 6px; }
+  .content { padding: 15px; }
+  footer { font-size: 0.8em; padding: 10px 5px; }
 }
   </style>
 </head>
 <body>
-<button class="hamburger" onclick="toggleMenu()">☰</button>
+<button class="hamburger" onclick="toggleMenu()" aria-label="Abrir/Cerrar menú">☰</button>
+
 <div class="page-container">
-  <div class="menu">
+  <div class="menu" id="menu">
     <h2>Secciones</h2>
     <button onclick="showSection('NomiWeb')">Acceso Nomiweb</button>
     <button onclick="showSection('pruebas')">Acceso Nomiweb Pruebas</button>
@@ -308,49 +292,42 @@ footer {
   <p>
     &copy; <span style="font-weight: bold;">Dynamic Modular System DMS S.A</span><br>
     Todos los derechos reservados.<br>
-    {{ now.year }}
+    {{ now.year }} Ver. 1.0.0
   </p>
 </footer>
 
 <script>
-  function showSection(id) {
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(s => {
-      s.classList.remove('active','animate__animated','animate__fadeInLeft','animate__fadeInRight','animate__zoomIn','animate__fadeInUp','animate__fadeInDown');
-    });
-
-    const target = document.getElementById(id);
-    if (target) {
-      target.classList.add('active','animate__animated');
-      switch(id) {
-        case 'NomiWeb':
-          target.classList.add('animate__fadeInLeft');
-          break;
-        case 'pruebas':
-          target.classList.add('animate__fadeInRight');
-          break;
-        case 'autorizaciones':
-          target.classList.add('animate__zoomIn');
-          break;
-        case 'externos':
-          target.classList.add('animate__fadeInUp');
-          break;
-        case 'dinamicos':
-          target.classList.add('animate__fadeInDown');
-          break;
-        case 'externos portal':
-          target.classList.add('animate__zoomIn');
-          break;
-      }
-    }
-
-    if (window.innerWidth <= 600) {
-      document.querySelector('.menu').classList.remove('show');
-    }
+  // Abrir/cerrar menú
+  function toggleMenu() {
+    document.getElementById("menu").classList.toggle("hidden");
   }
 
-  function toggleMenu() {
-    document.querySelector('.menu').classList.toggle('show');
+  // Cambiar de sección + ocultar menú para dar espacio al contenido
+  function showSection(sectionId) {
+    const sections = document.querySelectorAll(".section");
+    sections.forEach(sec => {
+      sec.classList.remove("active", "animate__animated", "animate__fadeInLeft", "animate__fadeInRight", "animate__fadeInUp", "animate__fadeInDown", "animate__zoomIn");
+    });
+
+    const selected = document.getElementById(sectionId);
+    if (!selected) return;
+
+    selected.classList.add("active", "animate__animated");
+
+    // Reiniciar animación
+    void selected.offsetWidth; // forzar reflow
+
+    switch (sectionId) {
+      case "NomiWeb": selected.classList.add("animate__fadeInLeft"); break;
+      case "pruebas": selected.classList.add("animate__fadeInRight"); break;
+      case "autorizaciones": selected.classList.add("animate__fadeInUp"); break;
+      case "externos": selected.classList.add("animate__fadeInDown"); break;
+      case "dinamicos": selected.classList.add("animate__zoomIn"); break;
+      case "externos portal": selected.classList.add("animate__zoomIn"); break;
+    }
+
+    // Ocultar menú tras seleccionar (para PC y móvil)
+    document.getElementById("menu").classList.add("hidden");
   }
 </script>
 </body>
